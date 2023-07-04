@@ -1,6 +1,7 @@
 import { Controller, Get, Post, Body, Param, Query } from '@nestjs/common';
 import { LobbyData } from './dto/lobby-data.dto';
 import { lobbies } from '../const';
+import { GameSession } from '../game/dto/game-data.dto';
 
 @Controller('data')
 export class DataController {
@@ -46,5 +47,14 @@ export class DataController {
       lobby[`As${who}`] = player.Name;
     }
     return { ...lobby, PlayerAmount: (lobby.Players.length + 1).toString() };
+  }
+  @Get('startGame/:lobbyId')
+  startGame(@Param('lobbyId') lobbyId: string, @Query('difficulty') difficulty: number): LobbyData {
+    let lobby = lobbies.find(item => item.Id == lobbyId);
+    lobby.BotDifficulty = Number(difficulty);
+    lobby.GameSession = new GameSession();
+    lobby.StartFlag = true;
+    console.log(lobby);
+    return lobby;
   }
 }

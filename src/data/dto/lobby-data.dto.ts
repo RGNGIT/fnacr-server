@@ -1,8 +1,8 @@
-import { GameData } from "src/game/dto/game-data.dto";
+import { GameSession } from "src/game/dto/game-data.dto";
 
 export class LobbyData {
   Id: string;
-  GameSession: GameData | null = null;
+  GameSession: GameSession | null = null;
   Leader: string;
   Players: string[] = [];
   AsCandy: string | null = null;
@@ -13,4 +13,6 @@ export class LobbyData {
   AsBlank: string | null = null;
   AsRat: string | null = null;
   PlayerAmount: string;
+  BotDifficulty: number = 0;
+  StartFlag: boolean = false;
 }

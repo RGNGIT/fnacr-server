@@ -1,4 +1,4 @@
-export class GameData {
+export class GameSession {
   CandyPos: number = 0;
   CindyPos: number = 0;
   ChesterPos: number = 0;
