@@ -14,7 +14,7 @@ export class DataController {
   @Post('createLobby')
   createLobby(@Body() leader): LobbyData {
     let lobby = new LobbyData();
-    lobby.Id = Math.floor(100000000 + Math.random() * 900000000).toString();
+    lobby.Id = Math.floor(10000 + Math.random() * 90000).toString();
     lobby.Leader = leader.Name;
     lobbies.push(lobby);
     return { ...lobby, PlayerAmount: (lobby.Players.length + 1).toString() };
@@ -22,6 +22,7 @@ export class DataController {
   @Post('connectToLobby/:id')
   connectToLobby(@Body() player, @Param('id') lobbyId: string) {
     const lobby: LobbyData = lobbies.find(item => item.Id == lobbyId);
+    console.log(lobby);
     lobby.Players.push(player.Name);
     return lobby ? { ...lobby, PlayerAmount: (lobby.Players.length + 1).toString() } : "NOT_FOUND";
   }
